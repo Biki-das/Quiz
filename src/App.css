@@ -1,0 +1,4 @@
+/* Custom style for left-aligning equations */
+.katex-container {
+  text-align: left;
+}

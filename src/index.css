@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&family=Work+Sans:wght@500&display=swap");
+
+/* Custom style for left-aligning equations */
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-family: "Work Sans", sans-serif;
+}
+.katex-display {
+  display: inline;
+}
+.katex-display > .katex {
+  display: inline;
+}
+
+.katex-display > .katex > .katex-html {
+  display: inline;
+}
