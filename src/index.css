@@ -11,7 +11,8 @@ body {
   font-family: "Work Sans", sans-serif;
 }
 .katex-display {
-  display: inline;
+  display: inline-block;
+  margin-top: 1rem;
 }
 .katex-display > .katex {
   display: inline;

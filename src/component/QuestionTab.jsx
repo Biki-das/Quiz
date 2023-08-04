@@ -27,11 +27,19 @@ export function QuestionTab({ quizzes, handleActiveTab, activeTab }) {
               }`}
               key={quiz.id}
             >
-              {quiz.flagged && <BookmarkIcon className="absolute right-0" />}
+              {quiz.isAttempted && !quiz.isCorrectlyGuessed && (
+                <WrongCheckIcon className="absolute left-2" />
+              )}
+              {!quiz.isAttempted && quiz.flagged && (
+                <BookmarkIcon className="absolute right-0" />
+              )}
+              {quiz.isCorrectlyGuessed && (
+                <RightCheckIcon className="absolute left-1" />
+              )}
               {!quiz.isAttempted && activeTab !== quiz.id ? (
                 <DefaultCircleIcon className="absolute left-1" />
               ) : null}
-              {activeTab === quiz.id && (
+              {activeTab === quiz.id && !quiz.isAttempted && (
                 <ProgressCircleIcon className="absolute left-1" />
               )}
               <span className="absolute left-12">{index + 1}</span>
