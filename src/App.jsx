@@ -42,7 +42,7 @@ export function App() {
     soundRef,
     value,
   ) {
-    if (submittedAnswer !== "") {
+    if (submittedAnswer !== "" && submittedAnswer !== "0") {
       const quiz = getQuizById(quizId);
       setisLoading(true);
       if (quiz.attempts > 0) {
