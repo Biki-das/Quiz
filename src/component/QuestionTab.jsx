@@ -4,7 +4,12 @@ import { ProgressCircleIcon } from "./Icons/ProgressCircleIcon";
 import { RightCheckIcon } from "./Icons/RightCheckIcon";
 import { WrongCheckIcon } from "./Icons/WrongCheckIcon";
 
-export function QuestionTab({ quizzes, handleActiveTab, activeTab }) {
+export function QuestionTab({
+  quizzes,
+  handleActiveTab,
+  activeTab,
+  setCurrentActiveTab,
+}) {
   return (
     <aside className="gap-4 w-[400px] border-2 border-gray-200 h-[100vh] p-4">
       <h1 className="font-bold text-lg">Assignment Title Here</h1>
@@ -20,6 +25,7 @@ export function QuestionTab({ quizzes, handleActiveTab, activeTab }) {
             <button
               onClick={() => {
                 handleActiveTab(quiz.id);
+                setCurrentActiveTab(quiz.id, quiz);
               }}
               className={`relative text-base font-semibold text-[#03080E] w-[117px] rounded-md h-[40px] round flex justify-center items-center border-2  border-gray-200 ${
                 activeTab === quiz.id &&

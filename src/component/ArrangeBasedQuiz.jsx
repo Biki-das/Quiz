@@ -32,7 +32,7 @@ export function ArrangeBasedQuiz({
   };
   return (
     <div
-      className={`w-[940px] relative bg-white h-[360px] shadow-lg rounded-lg mt-20 p-4 ${
+      className={`w-[90%] lg:w-[940px] relative bg-white h-[480px] lg:h-[360px] shadow-lg rounded-lg mt-20 p-4 ${
         isModalVisible && `blur-sm`
       }`}
     >
@@ -78,9 +78,11 @@ export function ArrangeBasedQuiz({
                   key={item}
                   draggableId={item.toString()}
                   index={index}
+                  isDragDisabled={flagged || quiz.isAttempted}
                 >
                   {(provided) => (
                     <li
+                      className="border-2 1px solid gray mt-2 w-[50%] text-center text-lg"
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}

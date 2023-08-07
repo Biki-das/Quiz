@@ -21,7 +21,7 @@ export function InputBasedQuiz({
 
   return (
     <div
-      className={`w-[940px] relative bg-white h-[360px] shadow-lg rounded-lg mt-20 p-4 ${
+      className={`w-[80%] lg:w-[940px] relative bg-white h-[480px] lg:h-[360px] shadow-lg rounded-lg mt-20 p-4 ${
         isModalVisible && `blur-sm`
       }`}
     >
@@ -59,7 +59,7 @@ export function InputBasedQuiz({
       <p className="mt-2 text-gray-700 text-sm font-medium">Answer</p>
       <input
         type="text"
-        className={`mt-4 w-[720px] h-[44px] rounded-lg border-1 border-gray-300  ${
+        className={`mt-4 w-[95%] lg:w-[720px] h-[44px] rounded-lg border-1 border-gray-300  ${
           quiz.isAttempted || quiz.flagged
             ? `cursor-not-allowed`
             : `cursor-pointer`
@@ -87,7 +87,7 @@ export function InputBasedQuiz({
             onClick={() => {
               handleAnswerSubmission(
                 quiz.id,
-                inputValue,
+                String(Math.round(Number(inputValue))),
                 setIsModalVisible,
                 setModalMessage,
                 soundRef,

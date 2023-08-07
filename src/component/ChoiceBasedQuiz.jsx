@@ -25,7 +25,7 @@ export function ChoiceBasedQuiz({
 
   return (
     <div
-      className={`w-[940px] relative bg-white h-[360px] shadow-lg rounded-lg mt-20 p-4 ${
+      className={`w-[90%] lg:w-[940px] relative bg-white h-[480px] lg:h-[360px] shadow-lg rounded-lg mt-20 p-4 ${
         isModalVisible && `blur-sm`
       }`}
     >
@@ -83,7 +83,7 @@ export function ChoiceBasedQuiz({
               );
             }}
           >
-            {loading ? <Loader /> : "check"}
+            {loading ? <Loader /> : "Check"}
           </button>
         )}
         {!quiz.isAttempted && (

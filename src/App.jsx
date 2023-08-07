@@ -152,10 +152,43 @@ export function App() {
 
   async function getQuizzes() {
     const { data } = await supabase.from("quizzes").select("*").order("id");
-    let currTab =
-      data.find((item) => !item.isAttempted && !item.flagged === true)?.id || 0;
+    let currTab = data.find(
+      (item) => !item.isAttempted && !item.flagged && item.isCurrentlyActive,
+    )?.id;
+
+    // If there's no such item, set currTab to the first item in the list
+    if (!currTab) {
+      currTab = data.find((item) => !item.isAttempted && !item.flagged)?.id;
+    }
     setQuizzes(data);
     setActiveTab(currTab);
+  }
+
+  async function setCurrentActiveTab(quizId, quiz) {
+    if (!quiz.isAttempted || !quiz.isflagged) {
+      try {
+        const updatePromises = quizzes.map((quiz) => {
+          const updatedQuiz = {
+            ...quiz,
+            isCurrentlyActive: quiz.id === quizId,
+          };
+          return supabase.from("quizzes").update(updatedQuiz).eq("id", quiz.id);
+        });
+
+        await Promise.all(updatePromises);
+
+        setQuizzes((prevQuizzes) => {
+          return prevQuizzes.map((quiz) => {
+            return {
+              ...quiz,
+              isCurrentlyActive: quiz.id === quizId,
+            };
+          });
+        });
+      } catch (error) {
+        console.error("Error setting current active tab:", error);
+      }
+    }
   }
 
   const handleQuizReset = () => {
@@ -203,11 +236,14 @@ export function App() {
 
   return (
     <div className="w-full mx-auto flex">
-      <QuestionTab
-        handleActiveTab={handleActiveTab}
-        activeTab={activeTab}
-        quizzes={quizzes}
-      />
+      <div className="hidden md:block">
+        <QuestionTab
+          handleActiveTab={handleActiveTab}
+          activeTab={activeTab}
+          quizzes={quizzes}
+          setCurrentActiveTab={setCurrentActiveTab}
+        />
+      </div>
       <Quiz
         quizzes={quizzes}
         activeTab={activeTab}
@@ -216,14 +252,8 @@ export function App() {
         nextActiveTab={nextActiveTab}
         nextTab={nextTab}
         loading={loading}
+        handleQuizReset={handleQuizReset}
       />
-      <button
-        onClick={() => {
-          handleQuizReset();
-        }}
-      >
-        reset quiz
-      </button>
     </div>
   );
 }

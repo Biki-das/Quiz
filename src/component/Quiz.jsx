@@ -12,6 +12,7 @@ export function Quiz({
   nextTab,
   nextActiveTab,
   handleAnswerSubmission,
+  handleQuizReset,
   loading,
 }) {
   const [isEnabled, setIsEnabled] = useState(() => {
@@ -43,7 +44,7 @@ export function Quiz({
   }, [isEnabled]);
 
   return (
-    <div className="flex-[2] bg-[#F7F5F1] flex justify-center relative 100vh">
+    <div className="flex-[2] bg-[#F7F5F1] flex justify-center relative h-[100vh]">
       {quizzes?.map((quiz, index) =>
         activeTab === quiz.id ? (
           <Fragment key={quiz.id}>
@@ -110,6 +111,7 @@ export function Quiz({
         setIsPlaying={setIsPlaying}
         modalMessage={modalMessage}
         ref={soundRef}
+        handleQuizReset={handleQuizReset}
       />
       {isModalVisible && (
         <Modal
